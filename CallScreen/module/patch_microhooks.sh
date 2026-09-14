@@ -5,9 +5,9 @@ MODDIR=${0%/*}
 [ -n "$MODPATH" ] && MODDIR="$MODPATH"
 
 SQLITE_BIN=""
-if [ -f "$MODDIR/system/bin/sqlite3" ]; then
-    chmod 0755 "$MODDIR/system/bin/sqlite3" 2>/dev/null
-    SQLITE_BIN="$MODDIR/system/bin/sqlite3"
+if [ -f "$MODDIR/bin/sqlite3" ]; then
+    chmod 0755 "$MODDIR/bin/sqlite3" 2>/dev/null
+    SQLITE_BIN="$MODDIR/bin/sqlite3"
 elif command -v sqlite3 >/dev/null 2>&1; then
     SQLITE_BIN="$(command -v sqlite3)"
 elif [ -x /system/bin/sqlite3 ]; then
