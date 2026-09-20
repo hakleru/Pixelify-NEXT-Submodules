@@ -17,11 +17,15 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: Setup Android NDK and CMake
+        run: |
+          $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "ndk;25.2.9519653" "cmake;3.22.1"
+
       - name: Make gradlew executable
         run: chmod +x gradlew
 
-      - name: Build GPhotos
-        run: ./gradlew :GPhotos:zip -x :spoofing || ./gradlew :GPhotos:assembleRelease -x :spoofing || ./gradlew :GPhotos:build -x :spoofing
+      - name: Build GPhotos Submodule
+        run: ./gradlew :GPhotos:zip || ./gradlew :GPhotos:assembleRelease || ./gradlew :GPhotos:build
 
       - name: Upload GPhotos Artifact
         uses: actions/upload-artifact@v4
