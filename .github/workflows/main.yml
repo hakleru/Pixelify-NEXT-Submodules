@@ -12,7 +12,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: '17'
           distribution: 'temurin'
@@ -27,12 +27,12 @@ jobs:
       - name: Build GPhotos Submodule
         run: ./gradlew :GPhotos:zip || ./gradlew :GPhotos:assembleRelease || ./gradlew :GPhotos:build
 
-      - name: Upload GPhotos Artifact
+      - name: Upload All Output Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: GPhotos-Magisk-Module
+          name: GPhotos-Build-Output
           path: |
-            GPhotos/**/build/**/*.zip
-            GPhotos/out/*.zip
-            GPhotos/**/*.zip
-            **/GPhotos*.zip
+            **/build/outputs/**/*
+            **/build/zip/*
+            **/*.zip
+            **/*.apk
