@@ -1,4 +1,4 @@
-name: Build GPhotos Submodule
+name: Build All Submodules
 
 on:
   workflow_dispatch:
@@ -20,11 +20,14 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x gradlew
 
-      - name: Build GPhotos Module
-        run: ./gradlew :GPhotos:zip || ./gradlew :GPhotos:assembleRelease || ./gradlew build
+      - name: Build All Modules
+        run: ./gradlew assembleRelease || ./gradlew build
 
-      - name: Upload Zip Artifact
+      - name: Upload Zip Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: GPhotos-Magisk-Module
-          path: "**/*.zip"
+          name: Pixelify-Modules
+          path: |
+            **/build/outputs/**/*.zip
+            **/build/zip/*.zip
+            **/out/*.zip
