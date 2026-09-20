@@ -25,7 +25,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build GPhotos Magisk Zip
-        run: ./gradlew :GPhotos:zipRelease || ./gradlew :GPhotos:zip || ./gradlew :GPhotos:makeZip
+        run: ./gradlew :GPhotos:buildZip --no-configuration-cache
 
       - name: Upload Magisk Module Artifact
         uses: actions/upload-artifact@v4
