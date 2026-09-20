@@ -12,7 +12,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: '17'
           distribution: 'temurin'
@@ -23,14 +23,11 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x gradlew
 
-      - name: Build GPhotos Submodule
-        run: ./gradlew :GPhotos:assembleRelease || ./gradlew :GPhotos:zip || ./gradlew build
+      - name: Build GPhotos Module
+        run: ./gradlew :GPhotos:module:zip || ./gradlew :GPhotos:assembleRelease || ./gradlew assembleRelease
 
       - name: Upload Zip Artifact
         uses: actions/upload-artifact@v4
         with:
           name: GPhotos-Magisk-Module
-          path: |
-            **/build/outputs/**/*.zip
-            **/out/**/*.zip
-            **/*.zip
+          path: "**/*.zip"
