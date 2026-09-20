@@ -24,15 +24,15 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x gradlew
 
-      - name: Build GPhotos Submodule
-        run: ./gradlew :GPhotos:zip || ./gradlew :GPhotos:assembleRelease || ./gradlew :GPhotos:build
+      - name: Build GPhotos Magisk Zip
+        run: ./gradlew :GPhotos:zipRelease || ./gradlew :GPhotos:zip || ./gradlew :GPhotos:makeZip
 
-      - name: Upload All Output Artifacts
+      - name: Upload Magisk Module Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: GPhotos-Build-Output
+          name: GPhotos-Magisk-Module-FINAL
           path: |
-            **/build/outputs/**/*
-            **/build/zip/*
+            GPhotos/build/outputs/zip/*.zip
+            GPhotos/build/outputs/*.zip
+            GPhotos/build/*.zip
             **/*.zip
-            **/*.apk
